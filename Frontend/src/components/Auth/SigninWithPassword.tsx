@@ -1,12 +1,20 @@
 "use client";
-import React, { useState } from "react";
+import React, { FormEvent, useState } from "react";
 import Link from "next/link";
+import { useRouter } from 'next/navigation'
 
 export default function SigninWithPassword() {
   const [data, setData] = useState({
     remember: false,
   });
 
+  const router = useRouter()
+
+  const handleSignin = (e: FormEvent) => {
+    e.preventDefault();
+    router.push("/dashboard");
+  };
+  
   return (
     <form>
       <div className="mb-4">
@@ -14,12 +22,12 @@ export default function SigninWithPassword() {
           htmlFor="email"
           className="mb-2.5 block font-medium text-dark dark:text-white"
         >
-          Email
+          Username
         </label>
         <div className="relative">
           <input
             type="email"
-            placeholder="Enter your email"
+            placeholder="Enter your username"
             name="email"
             className="w-full rounded-lg border border-stroke bg-transparent py-[15px] pl-6 pr-11 font-medium text-dark outline-none focus:border-primary focus-visible:shadow-none dark:border-dark-3 dark:bg-dark-2 dark:text-white dark:focus:border-primary"
           />
@@ -132,7 +140,7 @@ export default function SigninWithPassword() {
         <button
           type="submit"
           className="flex w-full cursor-pointer items-center justify-center gap-2 rounded-lg bg-primary p-4 font-medium text-white transition hover:bg-opacity-90"
-        >
+        onClick={handleSignin}>
           Sign In
         </button>
       </div>
